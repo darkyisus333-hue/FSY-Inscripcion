@@ -1,0 +1,111 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>FSY Nicaragua · Formulario de inscripción</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#eef1f6;--sf:#fff;--ink:#12233f;--mu:#5d6c85;--ln:#d3dae6;--nv:#17306b;--ok:#12a150;--okb:#dff5e8;--bad:#d0342c;--badb:#fbe3e1;--ac:#2457d6;--fd:"Barlow Condensed","Arial Narrow",sans-serif;--fb:Barlow,system-ui,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1526;--sf:#16213a;--ink:#e8eefb;--mu:#98a8c8;--ln:#2a3a5e;--nv:#8fb0f7;--ok:#4cd08a;--okb:#123a28;--bad:#ff8077;--badb:#47201f;--ac:#6f9bff;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 var(--fb);padding:14px max(14px,env(safe-area-inset-right,0px)) 60px max(14px,env(safe-area-inset-left,0px))}
+.wrap{max-width:720px;margin:0 auto}h1{font:700 30px var(--fd);margin:0 0 2px;border-left:5px solid #c9a227;padding-left:10px}h2{font:700 22px var(--fd);margin:0 0 8px}
+.box{background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:14px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}.grid .w{grid-column:1/-1}
+label{display:flex;flex-direction:column;gap:3px;font-size:13px;color:var(--mu)}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--ln);border-radius:7px;padding:11px;min-width:0;width:100%}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.btn{font:700 15px var(--fb);background:var(--nv);color:#fff;border:2px solid var(--nv);border-radius:9px;padding:12px 18px;cursor:pointer;text-align:center;display:inline-flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 2px 0 rgba(0,0,0,.28),0 4px 10px rgba(18,35,63,.18);user-select:none}
+.btn:active{transform:translateY(2px);box-shadow:none}.btn.s{padding:8px 12px;font-size:13px}
+@media (prefers-color-scheme:dark){.btn{color:#0d1526}.btn.d{color:#fff}}
+.btn.g{background:var(--sf);color:var(--nv);border-color:var(--nv)}.btn.d{background:var(--bad);border-color:var(--bad);color:#fff}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.hint{font-size:13px;color:var(--mu);margin:6px 0 0}
+.doc{border:1px solid var(--ln);border-radius:10px;padding:10px;margin-top:10px}.doc b{display:block}
+.doc img{width:100%;max-height:170px;object-fit:contain;background:#fff;border-radius:6px;margin-top:6px;border:1px solid var(--ln)}
+.noimg{margin-top:6px;border:2px dashed var(--ln);border-radius:6px;padding:18px;text-align:center;color:var(--mu)}
+.msg{border-radius:10px;padding:12px;margin-top:12px;font-weight:600;border:2px solid}.msg.bad{background:var(--badb);border-color:var(--bad);color:var(--bad)}.msg.ok{background:var(--okb);border-color:var(--ok);color:var(--ok)}
+[hidden]{display:none!important}
+</style></head><body>
+<div class="wrap">
+<h1>FSY Nicaragua · Inscripción</h1>
+<p class="hint" style="margin:2px 0 12px 15px">Llena tus datos, toma las fotos y descarga tu PDF. Entrégalo al organizador: él lo sube a la página de inscripción y quedas registrado con tus fotos.</p>
+<form class="box" id="f" autocomplete="off" novalidate>
+<div class="grid">
+<label class="w">Quién eres<select id="f-role"><option>Participante</option><option>Logística</option><option>Coordinador auxiliar</option><option>Consejero</option></select></label>
+<label class="w">Nombre completo<input id="f-name" autocomplete="name"></label>
+<label>Edad<input id="f-age" type="number" min="0" max="120" inputmode="numeric"></label>
+<label>Sexo<select id="f-sex"><option value="">Elegir…</option><option>Hombre</option><option>Mujer</option></select></label>
+<label>Estaca o distrito<input id="f-estaca" list="dl-e"></label>
+<label>Barrio o rama<input id="f-barrio"></label>
+<label>Teléfono<input id="f-phone" type="tel" inputmode="tel"></label>
+<label>Contacto de emergencia<input id="f-emerg" placeholder="Nombre y teléfono"></label>
+<label>N.º de cédula<input id="f-cedula" placeholder="001-000000-0000X"></label>
+<label id="w-partida" hidden>N.º de partida de nacimiento<input id="f-partida"></label>
+<label class="w">Notas (alergias, salud u otra información importante)<input id="f-notes"></label>
+</div>
+<datalist id="dl-e"><option value="Chinandega Oeste"><option value="Chinandega"><option value="León"><option value="Matagalpa"><option value="Distrito Estelí"></datalist>
+<div id="docs"></div>
+<div class="acts"><button class="btn" type="submit">📄 Descargar PDF</button><button class="btn g" type="button" id="sh" hidden>📤 Compartir PDF</button><button class="btn g" type="button" id="nw">🗑 Nueva inscripción</button></div>
+<div id="msg" class="msg" hidden></div>
+</form></div>
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const F=["role","name","age","sex","estaca","barrio","phone","emerg","cedula","partida","notes"];
+const LAB={cedula:"Cédula (frente)",cedula2:"Cédula (atrás)",partida:"Partida de nacimiento"};
+let ph={},last=null;
+const isMinor=()=>$("f-age").value!==""&&+$("f-age").value<18;
+const docKeys=()=>["cedula","cedula2",...(isMinor()?["partida"]:[])];
+function shrink(file){return new Promise((ok,no)=>{const im=new Image(),u=URL.createObjectURL(file);im.onload=()=>{const s=Math.min(1,1400/Math.max(im.naturalWidth,im.naturalHeight)),c=document.createElement("canvas");c.width=im.naturalWidth*s|0;c.height=im.naturalHeight*s|0;const g=c.getContext("2d");g.fillStyle="#fff";g.fillRect(0,0,c.width,c.height);g.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);ok({d:c.toDataURL("image/jpeg",.78),w:c.width,h:c.height})};im.onerror=()=>no();im.src=u})}
+function paintDocs(){const m=isMinor();$("w-partida").hidden=!m;
+  $("docs").innerHTML='<h2 style="margin-top:16px">Fotos de documentos</h2>'+(m?'<p class="hint">Eres menor de 18: toma foto de tu partida de nacimiento. Si tienes cédula, también puedes tomarle foto (frente y atrás).</p>':'<p class="hint">Toma foto de tu cédula, por el frente y por atrás. Que se lea bien y no tenga reflejos.</p>')+
+  docKeys().map(k=>{const f=ph[k];return `<div class="doc"><b>${LAB[k]}</b>${f?`<img src="${f.d}" alt="${LAB[k]}">`:'<div class="noimg">Sin foto</div>'}<div class="acts" style="margin-top:8px"><label class="btn s">📷 Tomar foto<input type="file" accept="image/*" capture="environment" hidden data-k="${k}"></label><label class="btn g s">🖼 Subir imagen<input type="file" accept="image/*" hidden data-k="${k}"></label>${f?`<button type="button" class="btn d s" data-x="${k}">Quitar</button>`:""}</div></div>`}).join("")}
+$("docs").onchange=async e=>{const i=e.target.closest("[data-k]");if(!i)return;const f=i.files[0];i.value="";if(!f)return;try{ph[i.dataset.k]=await shrink(f);paintDocs()}catch(x){say("No se pudo leer la foto. Intenta otra vez.",1)}};
+$("docs").onclick=e=>{const b=e.target.closest("[data-x]");if(b){delete ph[b.dataset.x];paintDocs()}};
+function say(t,bad){const m=$("msg");m.hidden=!t;m.className="msg "+(bad?"bad":"ok");m.textContent=t}
+const read=()=>{const d={};F.forEach(f=>d[f]=$("f-"+f).value.trim());return d};
+function check(d){const m=[];if(!d.name)m.push("el nombre");if(d.age==="")m.push("la edad");if(!d.sex)m.push("el sexo");if(!d.estaca)m.push("la estaca");if(!d.barrio)m.push("el barrio");if(!d.emerg)m.push("el contacto de emergencia");
+  if(d.age!==""&&+d.age>=18){if(!d.cedula)m.push("el número de cédula");if(!ph.cedula)m.push("la foto de la cédula (frente)");if(!ph.cedula2)m.push("la foto de la cédula (atrás)")}
+  else if(d.age!==""&&!ph.partida&&!(d.cedula&&ph.cedula&&ph.cedula2))m.push("la foto de la partida de nacimiento");
+  return m}
+/* ---- PDF (con los datos dentro para subirlo a la página de inscripción) ---- */
+const lat=s=>{s=String(s);const u=new Uint8Array(s.length);for(let i=0;i<s.length;i++){const c=s.charCodeAt(i);u[i]=c<256?c:63}return u};
+const pe=s=>String(s).replace(/[\\()]/g,"\\$&").replace(/[\r\n]+/g," ");
+const wrapT=(s,n)=>{const L=[];let c="";String(s).split(/\s+/).forEach(w=>{if((c+" "+w).trim().length>n){L.push(c);c=w}else c=(c+" "+w).trim()});if(c)L.push(c);return L};
+function makePDF(pg,b64){const objs=[],add=p=>objs.push(p);
+  add(["<< /Type /Catalog /Pages 2 0 R >>"]);add(null);
+  add(["<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>"]);add(["<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>"]);
+  const xo=[];pg.imgs.forEach((im,i)=>{xo.push(`/Im${i} ${add([`<< /Type /XObject /Subtype /Image /Width ${im.w} /Height ${im.h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${im.bytes.length} >>\nstream\n`,im.bytes,"\nendstream"])} 0 R`)});
+  const cid=add([`<< /Length ${pg.ops.length} >>\nstream\n`,pg.ops,"\nendstream"]);
+  const pid=add([`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /XObject << ${xo.join(" ")} >> >> /Contents ${cid} 0 R >>`]);
+  objs[1]=[`<< /Type /Pages /Kids [${pid} 0 R] /Count 1 >>`];
+  add([`<< /FSYDATA true /Length ${b64.length} >>\nstream\n`,b64,"\nendstream"]);
+  const out=[lat("%PDF-1.4\n")],off=[];let pos=out[0].length;
+  objs.forEach((parts,i)=>{off.push(pos);[lat(`${i+1} 0 obj\n`),...parts.map(p=>typeof p==="string"?lat(p):p),lat("\nendobj\n")].forEach(u=>{out.push(u);pos+=u.length})});
+  out.push(lat(`xref\n0 ${objs.length+1}\n0000000000 65535 f \n`+off.map(o=>String(o).padStart(10,"0")+" 00000 n \n").join("")+`trailer\n<< /Size ${objs.length+1} /Root 1 0 R >>\nstartxref\n${pos}\n%%EOF`));
+  return new Blob(out,{type:"application/pdf"})}
+function buildPDF(d,ks){
+  const T=(s,x,y,z=11,b=0)=>`BT /F${b?2:1} ${z} Tf ${x} ${y} Td (${pe(s)}) Tj ET\n`;
+  let o=`0.09 0.19 0.42 rg 0 790 595 52 re f\n0.78 0.6 0.17 rg 0 786 595 4 re f\n1 g\n`+T("FSY Nicaragua - Ficha de inscripción",40,809,16,1)+"0.07 0.14 0.25 rg\n"+T(d.name,40,762,18,1);
+  const rows=[["Rol",d.role],["Edad",d.age],["Sexo",d.sex],["Estaca",d.estaca],["Barrio",d.barrio],["Teléfono",d.phone],["Emergencia",d.emerg],["N.º de cédula",d.cedula],["N.º de partida",d.partida],["Notas",d.notes]].filter(r=>r[1]!==""&&r[1]!=null);
+  let y=738;rows.forEach(([l,v])=>{o+=T(l,40,y,10,1);wrapT(v,64).slice(0,2).forEach(t=>{o+=T(t,170,y,11);y-=14})});
+  o+=T("Fotos de documentos",40,516,13,1);const imgs=[];
+  ks.forEach((k,i)=>{const f=ph[k],bx=40+(i%2)*265,top=i<2?496:288;o+=T(LAB[k],bx,top+4,10,1)+`0.8 G ${bx} ${top-190} 250 190 re S\n`;
+    const s=Math.min(248/f.w,188/f.h),iw=f.w*s,ih=f.h*s;imgs.push({w:f.w,h:f.h,bytes:Uint8Array.from(atob(f.d.split(",")[1]),c=>c.charCodeAt(0))});
+    o+=`q ${iw.toFixed(1)} 0 0 ${ih.toFixed(1)} ${(bx+(250-iw)/2).toFixed(1)} ${(top-190+(190-ih)/2).toFixed(1)} cm /Im${i} Do Q\n`});
+  o+=T("Este PDF se sube a la página de inscripción de FSY para registrarte con tus fotos.",40,40,9);
+  const bytes=new TextEncoder().encode(JSON.stringify({v:1,p:d,k:ks}));let t="";bytes.forEach(c=>t+=String.fromCharCode(c));
+  return makePDF({ops:o,imgs},btoa(t))}
+/* ---- acciones ---- */
+$("f").onsubmit=e=>{e.preventDefault();const d=read(),m=check(d);
+  if(m.length){say("Falta: "+m.join(", ")+".",1);return}
+  const ks=docKeys().filter(k=>ph[k]);if(!isMinor()||!d.partida)d.partida=isMinor()?d.partida:"";
+  const blob=buildPDF(d,ks),name="FSY_"+d.name.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^\w]+/g,"_")+".pdf";last={blob,name};
+  const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);
+  say("Listo. Se descargó "+name+". Entrégalo al organizador (por WhatsApp o correo) para que te registre.");
+  try{if(navigator.canShare&&navigator.canShare({files:[new File([blob],name,{type:"application/pdf"})]}))$("sh").hidden=false}catch(x){}};
+$("sh").onclick=async()=>{if(!last)return;try{await navigator.share({files:[new File([last.blob],last.name,{type:"application/pdf"})],title:"Ficha FSY"})}catch(x){}};
+$("nw").onclick=()=>{if(!confirm("¿Borrar todo y empezar una inscripción nueva?"))return;$("f").reset();ph={};last=null;$("sh").hidden=true;say("");try{localStorage.removeItem("fsy-form")}catch(e){}paintDocs()};
+/* borrador de los textos (las fotos no se guardan) */
+const saveDraft=()=>{try{localStorage.setItem("fsy-form",JSON.stringify(read()))}catch(e){}};
+$("f").addEventListener("input",e=>{saveDraft();if(e.target.id==="f-age")paintDocs()});
+try{const d=JSON.parse(localStorage.getItem("fsy-form")||"{}");F.forEach(f=>{if(d[f])$("f-"+f).value=d[f]})}catch(e){}
+paintDocs();
+</script></body></html>
